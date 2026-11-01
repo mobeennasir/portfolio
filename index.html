@@ -687,23 +687,35 @@
   .eyebrow { text-transform: none; letter-spacing: 0.02em; font-size: 0.85rem; }
   .contact-card .btn-primary { color: #FFFFFF; }
 
-  /* ---- navy gold: Swiss editorial, formal ---- */
+  /* ---- A editorial: reversed hero, left rail headers, hairline grid ---- */
   body { counter-reset: sec; }
-  section { padding: 110px 0; }
+  body::before { background-image: linear-gradient(rgba(15,23,42,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.055) 1px, transparent 1px); background-size: 80px 80px; }
+  .orb { display: none; }
+  .ring-deco, .ring-deco::before, .ring-deco::after { border-radius: 0; }
+  .ring-a, .ring-b { animation: none; }
+  .navbar { border-bottom: 1px solid var(--border); }
   .hero { padding: 160px 0 110px; }
-  .hero h1 { font-size: clamp(2.9rem, 6.5vw, 4.8rem); }
-  .section-title { font-size: clamp(2rem, 3.6vw, 2.6rem); }
-  .hero-grid { gap: 72px; }
+  .hero-grid { grid-template-columns: 0.9fr 1.4fr; gap: 64px; }
+  .avatar-wrap { order: -1; }
   .avatar { border-radius: 16px; }
   .avatar img { border-radius: 12px; }
+  .hero h1 { font-size: clamp(2.9rem, 6.5vw, 4.8rem); }
+  .grad-text { background: none; -webkit-text-fill-color: var(--forest); color: var(--forest); animation: none; }
   .btn { border-radius: 10px; }
   .card { border-radius: 12px; }
-  .navbar { border-bottom: 1px solid var(--border); }
-  .grad-text { background: none; -webkit-text-fill-color: var(--forest); color: var(--forest); animation: none; }
-  .reveal { transform: translateY(18px); transition-duration: 0.7s; }
-  .orb-a, .orb-b, .orb-c { opacity: 0.35; }
+  section { padding: 110px 0; }
+  section .container:has(.sec-head) { display: grid; grid-template-columns: 250px 1fr; gap: 48px; align-items: start; }
+  .sec-head { position: sticky; top: 100px; }
+  .sec-head .section-title { font-size: clamp(1.6rem, 2.4vw, 2rem); }
+  .sec-head .divider { margin-bottom: 0; }
+  .sec-body { min-width: 0; }
   section .section-title::before { counter-increment: sec; content: "0" counter(sec) ".  "; color: var(--gold); font-size: 0.55em; vertical-align: super; letter-spacing: 0; }
+  .reveal { transform: translateY(12px); transition-duration: 0.5s; }
   .contact-card .btn-primary { background: linear-gradient(135deg, #92400E, #B45309); }
+  @media (max-width: 900px) {
+    section .container:has(.sec-head) { grid-template-columns: 1fr; }
+    .sec-head { position: static; }
+  }
 </style>
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
@@ -790,10 +802,7 @@
     <!-- ============ ABOUT ============ -->
     <section id="about" class="has-deco" aria-label="About">
       <div class="ring-deco ring-a" aria-hidden="true"></div>
-      <div class="container">
-        <span class="eyebrow reveal">About</span>
-        <h2 class="section-title reveal">A little about me</h2>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">About</span><h2 class="section-title reveal">A little about me</h2><div class="divider reveal"></div></div><div class="sec-body">
         <div class="about-grid">
           <div class="about-text reveal">
             <p>I'm in my 7th semester of BS Biotechnology at Bahauddin Zakariya University, Multan, where I've built a strong foundation in molecular biology, genetics, and biochemistry. What draws me to this field is how a molecular understanding of living systems can be turned into practical solutions in health, agriculture, and industry.</p>
@@ -821,7 +830,7 @@
             </ul>
           </aside>
         </div>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ RESEARCH INTERESTS ============ -->
@@ -835,11 +844,7 @@
           <path d="M0 340 C 200 320, 420 370, 620 350 S 1000 330, 1200 355"/>
         </g>
       </svg>
-      <div class="container">
-        <span class="eyebrow reveal">Research</span>
-        <h2 class="section-title reveal">Research interests</h2>
-        <p class="section-sub reveal">The areas of biotechnology I want to explore further in graduate school.</p>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">Research</span><h2 class="section-title reveal">Research interests</h2><div class="divider reveal"></div></div><div class="sec-body"><p class="section-sub reveal">The areas of biotechnology I want to explore further in graduate school.</p>
         <div class="grid-3">
           <article class="card reveal">
             <span class="icon-chip" aria-hidden="true">
@@ -863,16 +868,12 @@
             <p>Turning raw sequencing data into clear answers.</p>
           </article>
         </div>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ PROJECTS ============ -->
     <section id="projects" aria-label="Projects">
-      <div class="container">
-        <span class="eyebrow reveal">Projects</span>
-        <h2 class="section-title reveal">Selected work</h2>
-        <p class="section-sub reveal">Things I have built and worked on.</p>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">Projects</span><h2 class="section-title reveal">Selected work</h2><div class="divider reveal"></div></div><div class="sec-body"><p class="section-sub reveal">Things I have built and worked on.</p>
         <div class="grid-projects">
           <article class="card project-featured featured reveal">
             <span class="eyebrow" style="margin-bottom:8px;">Featured</span>
@@ -891,15 +892,12 @@
             </a>
           </article>
         </div>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ EDUCATION ============ -->
     <section id="education" aria-label="Education">
-      <div class="container">
-        <span class="eyebrow reveal">Education</span>
-        <h2 class="section-title reveal">Academic background</h2>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">Education</span><h2 class="section-title reveal">Academic background</h2><div class="divider reveal"></div></div><div class="sec-body">
         <div class="timeline">
           <div class="timeline-item card reveal">
             <h3>BS Biotechnology, Bahauddin Zakariya University, Multan</h3>
@@ -912,15 +910,12 @@
             <p>Pre-Medical</p>
           </div>
         </div>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ EXPERIENCE ============ -->
     <section id="experience" aria-label="Experience">
-      <div class="container">
-        <span class="eyebrow reveal">Experience</span>
-        <h2 class="section-title reveal">Where I have worked</h2>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">Experience</span><h2 class="section-title reveal">Where I have worked</h2><div class="divider reveal"></div></div><div class="sec-body">
         <div class="timeline">
           <div class="timeline-item card reveal">
             <h3>Independent Researcher, Computational Biology</h3>
@@ -938,16 +933,13 @@
             <p>Internship on "Basic Molecular Biology Techniques": PCR, tissue culture, and core microbiology methods.</p>
           </div>
         </div>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ SKILLS ============ -->
     <section id="skills" class="has-deco" aria-label="Skills">
       <div class="ring-deco ring-b" aria-hidden="true"></div>
-      <div class="container">
-        <span class="eyebrow reveal">Skills</span>
-        <h2 class="section-title reveal">Technical toolkit</h2>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">Skills</span><h2 class="section-title reveal">Technical toolkit</h2><div class="divider reveal"></div></div><div class="sec-body">
         <div class="grid-3">
           <article class="card reveal">
             <span class="icon-chip" aria-hidden="true">
@@ -985,15 +977,12 @@
             </div>
           </article>
         </div>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ CERTIFICATIONS ============ -->
     <section id="certifications" aria-label="Certifications">
-      <div class="container">
-        <span class="eyebrow reveal">Credentials</span>
-        <h2 class="section-title reveal">Certifications</h2>
-        <div class="divider reveal"></div>
+      <div class="container"><div class="sec-head"><span class="eyebrow reveal">Credentials</span><h2 class="section-title reveal">Certifications</h2><div class="divider reveal"></div></div><div class="sec-body">
         <ul class="cert-list">
           <li class="reveal">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="m8.8 13.5-2 7.5 5.2-3 5.2 3-2-7.5"/><path d="M9.5 9h.01M14.5 9h.01"/></svg>
@@ -1008,7 +997,7 @@
             <div><strong>Introduction to Data Analysis using Microsoft Excel</strong><span>Coursera project certificate, Jul 2026 · <a href="https://coursera.org/verify/XH5JLG4QYQIZ">Verify</a></span></div>
           </li>
         </ul>
-      </div>
+      </div></div>
     </section>
 
     <!-- ============ CONTACT ============ -->
