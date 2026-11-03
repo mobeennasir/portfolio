@@ -785,6 +785,20 @@
   @media (prefers-reduced-motion: reduce) {
     .nav-toggle-label span { transition: none; }
   }
+
+  /* ---- contact form ---- */
+  .contact-form { max-width: 36rem; margin: 0 auto 30px; text-align: left; }
+  .contact-form .form-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .contact-form .form-row label { flex: 1 1 200px; }
+  .contact-form label { display: block; font-size: 0.9rem; font-weight: 600; color: #CBD5E1; margin-bottom: 14px; }
+  .contact-form input, .contact-form select, .contact-form textarea { display: block; width: 100%; margin-top: 6px; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(248, 250, 252, 0.22); background: rgba(248, 250, 252, 0.06); color: #F1F5F9; font: inherit; font-size: 0.95rem; }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: #64748B; }
+  .contact-form select option { color: #0F172A; }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: 2px solid #B45309; outline-offset: 2px; border-color: rgba(229, 168, 61, 0.6); }
+  .contact-form .btn { width: 100%; justify-content: center; }
+  .contact-form .form-note { font-size: 0.85rem; color: #64748B; text-align: center; margin: 12px 0 0; }
+
 </style>
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
@@ -857,9 +871,13 @@
           <h1 class="reveal reveal-d1">Mobeen <span class="grad-text">Nasir</span></h1>
           <p class="hero-bio reveal reveal-d2">I'm a 7th-semester BS Biotechnology student at Bahauddin Zakariya University, Multan, applying for master's scholarships abroad to deepen my research training and build a career in biotechnology research.</p>
           <div class="hero-ctas reveal reveal-d3">
-            <a class="btn btn-primary" href="mobeen-nasir-cv.pdf" download>
+            <a class="btn btn-primary" href="Mobeen-nasir-cv.pdf" download>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
               Download CV
+            </a>
+            <a class="btn btn-ghost" href="Mobeen-Nasir-Europass-CV.pdf" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+              Europass CV
             </a>
             <a class="btn btn-ghost" href="#contact">Get in Touch</a>
           </div>
@@ -1107,6 +1125,29 @@
           <span class="eyebrow">Contact</span>
           <h2>Let's connect</h2>
           <p>If you supervise research in biotechnology or the life sciences, or know of a scholarship opportunity that fits, I'd welcome the chance to introduce myself.</p>
+          <form class="contact-form" id="contact-form" action="mailto:mubeennasir117@gmail.com" method="post" enctype="text/plain">
+            <div class="form-row">
+              <label>Your name
+                <input type="text" name="name" placeholder="Full name" required>
+              </label>
+              <label>Your email
+                <input type="email" name="email" placeholder="you@example.com" required>
+              </label>
+            </div>
+            <label>Topic
+              <select name="topic">
+                <option>Master's supervision</option>
+                <option>Scholarship opportunity</option>
+                <option>Research collaboration</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>Message
+              <textarea name="message" rows="5" placeholder="Introduce yourself and what you would like to discuss..." required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <p class="form-note">This opens your email app with a prefilled message addressed to me &mdash; nothing is stored on this site.</p>
+          </form>
           <div class="contact-actions">
             <a class="btn btn-primary" href="mailto:mubeennasir117@gmail.com">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>
@@ -1123,6 +1164,7 @@
               GitHub
             </a>
           </div>
+      </div>
       </div>
     </section>
   </main>
@@ -1190,6 +1232,23 @@
       if (e.key === 'Escape') { navToggle.checked = false; }
     });
   }
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = (form.elements['name'].value || '').trim();
+    var email = (form.elements['email'].value || '').trim();
+    var topic = form.elements['topic'].value;
+    var message = (form.elements['message'].value || '').trim();
+    var subject = encodeURIComponent('Portfolio contact: ' + topic + ' — ' + name);
+    var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nTopic: ' + topic + '\n\n' + message);
+    window.location.href = 'mailto:mubeennasir117@gmail.com?subject=' + subject + '&body=' + body;
+  });
 })();
 </script>
 </body>
