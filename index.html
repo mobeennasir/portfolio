@@ -65,59 +65,6 @@
             mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, #000 20%, transparent 75%);
   }
 
-  /* ---- subtle film grain ---- */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 70;
-    pointer-events: none;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
-  }
-
-  /* ---- soft daylight washes ---- */
-  .orb {
-    position: fixed;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 50%;
-    filter: blur(130px);
-  }
-  .orb-a {
-    width: 560px; height: 560px;
-    top: -180px; left: -140px;
-    background: radial-gradient(circle, #BFDBFE 0%, transparent 65%);
-    opacity: 0.55;
-    animation: drift-a 22s ease-in-out infinite alternate;
-  }
-  .orb-b {
-    width: 620px; height: 620px;
-    top: 38%; right: -220px;
-    background: radial-gradient(circle, #FDE68A 0%, transparent 65%);
-    opacity: 0.5;
-    animation: drift-b 26s ease-in-out infinite alternate;
-  }
-  @keyframes drift-a {
-    from { transform: translate(0, 0); }
-    to   { transform: translate(70px, 50px); }
-  }
-  @keyframes drift-b {
-    from { transform: translate(0, 0); }
-    to   { transform: translate(-60px, -70px); }
-  }
-  .orb-c {
-    width: 480px; height: 480px;
-    bottom: -190px; left: 26%;
-    background: radial-gradient(circle, #DBEAFE 0%, transparent 62%);
-    opacity: 0.5;
-    animation: drift-c 30s ease-in-out infinite alternate;
-  }
-  @keyframes drift-c {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(50px, -60px) scale(1.08); }
-  }
-
   .page { position: relative; z-index: 1; }
 
   .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
@@ -587,23 +534,6 @@
   /* ---- ambient background décor ---- */
   .has-deco { position: relative; overflow: hidden; }
   .has-deco .container { position: relative; z-index: 1; }
-  .ring-deco {
-    position: absolute;
-    border: 1px solid rgba(30, 58, 95, 0.10);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .ring-deco::before, .ring-deco::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .ring-deco::before { inset: 30px; border: 1px solid rgba(30, 58, 95, 0.08); }
-  .ring-deco::after { inset: 60px; border: 1px solid rgba(180, 83, 9, 0.12); }
-  .ring-a { width: 440px; height: 440px; top: -140px; right: -150px; animation: spin 90s linear infinite; }
-  .ring-b { width: 360px; height: 360px; bottom: -120px; left: -130px; animation: spin 110s linear infinite reverse; }
   .contour {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
@@ -611,25 +541,6 @@
     opacity: 0.05;
     pointer-events: none;
     z-index: 0;
-  }
-  .mote {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(circle, rgba(180, 83, 9, 0.55), transparent 70%);
-    filter: blur(1px);
-    opacity: 0.5;
-    animation: rise 14s ease-in-out infinite;
-  }
-  .mote.m1 { width: 9px; height: 9px; left: 8%; bottom: 12%; }
-  .mote.m2 { width: 13px; height: 13px; left: 22%; bottom: 8%; animation-delay: -4s; background: radial-gradient(circle, rgba(46, 80, 119, 0.5), transparent 70%); }
-  .mote.m3 { width: 7px; height: 7px; left: 55%; bottom: 14%; animation-delay: -8s; }
-  .mote.m4 { width: 11px; height: 11px; left: 78%; bottom: 10%; animation-delay: -2s; background: radial-gradient(circle, rgba(46, 80, 119, 0.5), transparent 70%); }
-  .mote.m5 { width: 8px; height: 8px; left: 90%; bottom: 18%; animation-delay: -11s; }
-  @keyframes rise {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-52px); }
   }
 
   /* ---- responsive ---- */
@@ -657,7 +568,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
-    .orb-a, .orb-b, .orb-c, .grad-text, .ring-a, .ring-b, .mote { animation: none; }
+    .grad-text { animation: none; }
     .card, .btn, .chip, .cert-list li, .social-link, .icon-chip { transition: none; }
   }
 
@@ -673,9 +584,6 @@
   /* ---- A editorial: reversed hero, left rail headers, hairline grid ---- */
   body { counter-reset: sec; }
   body::before { background-image: linear-gradient(rgba(15,23,42,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.055) 1px, transparent 1px); background-size: 80px 80px; }
-  .orb { display: none; }
-  .ring-deco, .ring-deco::before, .ring-deco::after { border-radius: 0; }
-  .ring-a, .ring-b { animation: none; }
   .navbar { border-bottom: 1px solid var(--border); }
   .hero { padding: 160px 0 110px; }
   .hero-grid { grid-template-columns: 0.9fr 1.4fr; gap: 64px; }
@@ -804,9 +712,6 @@
 </head>
 <body>
 
-<div class="orb orb-a" aria-hidden="true"></div>
-<div class="orb orb-b" aria-hidden="true"></div>
-<div class="orb orb-c" aria-hidden="true"></div>
 
 <div class="page">
 
@@ -861,11 +766,6 @@
               </g>
             </svg>
       </div>
-      <span class="mote m1" aria-hidden="true"></span>
-      <span class="mote m2" aria-hidden="true"></span>
-      <span class="mote m3" aria-hidden="true"></span>
-      <span class="mote m4" aria-hidden="true"></span>
-      <span class="mote m5" aria-hidden="true"></span>
       <div class="container hero-grid">
         <div>
           <h1 class="reveal reveal-d1">Mobeen <span class="grad-text">Nasir</span></h1>
@@ -890,7 +790,6 @@
 
     <!-- ============ ABOUT ============ -->
     <section id="about" class="has-deco" aria-label="About">
-      <div class="ring-deco ring-a" aria-hidden="true"></div>
       <div class="container"><div class="sec-head"><span class="eyebrow reveal">About</span><h2 class="section-title reveal">A little about me</h2><div class="divider reveal"></div></div><div class="sec-body">
         <div class="about-grid">
           <div class="about-text reveal">
@@ -1027,7 +926,6 @@
 
     <!-- ============ SKILLS ============ -->
     <section id="skills" class="has-deco" aria-label="Skills">
-      <div class="ring-deco ring-b" aria-hidden="true"></div>
       <div class="container"><div class="sec-head"><span class="eyebrow reveal">Skills</span><h2 class="section-title reveal">Technical toolkit</h2><div class="divider reveal"></div></div><div class="sec-body">
         <div class="grid-3">
           <article class="card reveal">
