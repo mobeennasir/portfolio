@@ -678,12 +678,11 @@
   .contact-form .form-row label { flex: 1 1 200px; }
   .contact-form label { display: block; font-size: 0.9rem; font-weight: 600; color: #CBD5E1; margin-bottom: 14px; }
   .contact-form input, .contact-form select, .contact-form textarea { display: block; width: 100%; margin-top: 6px; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(248, 250, 252, 0.22); background: rgba(248, 250, 252, 0.06); color: #F1F5F9; font: inherit; font-size: 0.95rem; }
-  .contact-form input::placeholder, .contact-form textarea::placeholder { color: #64748B; }
   .contact-form select option { color: #0F172A; }
   .contact-form textarea { resize: vertical; min-height: 120px; }
   .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: 2px solid #B45309; outline-offset: 2px; border-color: rgba(229, 168, 61, 0.6); }
   .contact-form .btn { width: 100%; justify-content: center; }
-  .contact-form .form-note { font-size: 0.85rem; color: #64748B; text-align: center; margin: 12px 0 0; }
+  .contact-form .form-status { font-size: 0.85rem; color: #64748B; text-align: center; margin: 12px 0 0; }
 
 </style>
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
@@ -943,13 +942,13 @@
           <span class="eyebrow">Contact</span>
           <h2>Let's connect</h2>
           <p>If you supervise research in biotechnology or the life sciences, or know of a scholarship opportunity that fits, I'd welcome the chance to introduce myself.</p>
-          <form class="contact-form" id="contact-form" action="mailto:mubeennasir117@gmail.com" method="post" enctype="text/plain">
+          <form class="contact-form" id="contact-form">
             <div class="form-row">
               <label>Your name
-                <input type="text" name="name" placeholder="Full name" required>
+                <input type="text" name="name" required>
               </label>
               <label>Your email
-                <input type="email" name="email" placeholder="you@example.com" required>
+                <input type="email" name="email" required>
               </label>
             </div>
             <label>Topic
@@ -961,10 +960,10 @@
               </select>
             </label>
             <label>Message
-              <textarea name="message" rows="5" placeholder="Introduce yourself and what you would like to discuss..." required></textarea>
+              <textarea name="message" rows="5" required></textarea>
             </label>
             <button class="btn btn-primary" type="submit">Send message</button>
-            <p class="form-note">This opens your email app with a prefilled message addressed to me &mdash; nothing is stored on this site.</p>
+            <p class="form-status" id="form-status" hidden></p>
           </form>
           <div class="contact-actions">
             <a class="btn btn-primary" href="mailto:mubeennasir117@gmail.com">
@@ -1057,15 +1056,28 @@
   'use strict';
   var form = document.getElementById('contact-form');
   if (!form) return;
+  var status = document.getElementById('form-status');
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = (form.elements['name'].value || '').trim();
     var email = (form.elements['email'].value || '').trim();
     var topic = form.elements['topic'].value;
     var message = (form.elements['message'].value || '').trim();
-    var subject = encodeURIComponent('Portfolio contact: ' + topic + ' — ' + name);
-    var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nTopic: ' + topic + '\n\n' + message);
-    window.location.href = 'mailto:mubeennasir117@gmail.com?subject=' + subject + '&body=' + body;
+    var subject = 'Portfolio contact: ' + topic + ' \u2014 ' + name;
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\nTopic: ' + topic + '\n\n' + message;
+    var url = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent('mubeennasir117@gmail.com') + '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    var win = window.open(url, '_blank');
+    if (status) {
+      if (win) {
+        status.textContent = 'Opening your email compose window with the message prefilled \u2014 just hit Send there.';
+      } else {
+        status.textContent = 'The compose window was blocked. Please email me directly at mubeennasir117@gmail.com.';
+      }
+      status.hidden = false;
+    }
+    if (!win) {
+      window.location.href = 'mailto:mubeennasir117@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    }
   });
 })();
 </script>
