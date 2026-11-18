@@ -282,6 +282,9 @@
   
   .grid-projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .grid-projects .featured { grid-column: 1 / -1; }
+  .grid-projects .project-wide { grid-column: 1 / -1; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-row .pill-tag { margin: 0; }
 
   .project-featured {
     background:
@@ -828,11 +831,11 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
             </a>
           </article>
-          <article class="card reveal reveal-d1">
+          <article class="card project-wide reveal reveal-d1">
             <span class="eyebrow" style="margin-bottom:8px;">Group project, top 10 nomination</span>
             <h3 style="font-size:1.35rem;">Liquid Tree Carbon Capture and Carbon Ink</h3>
             <p style="margin:12px 0 18px;">Led a 5 member group at Fighting Smog with Science: Inventions, Solutions and Prevention (2024), Institute of Molecular Biology and Biotechnology, Bahauddin Zakariya University, Multan. Our liquid tree based system used a carbon collector to capture carbon and convert it into ink. The group was nominated in the top 10.</p>
-            <div>
+            <div class="tag-row">
               <span class="pill-tag">Carbon Capture</span>
               <span class="pill-tag">Environmental Biotechnology</span>
               <span class="pill-tag">Science Exhibition</span>
